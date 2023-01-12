@@ -1,34 +1,29 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 
-export class ContactForm extends Component {
-  static propTypes = {
-    addContact: PropTypes.func.isRequired,
-    contacts: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      })
-    ),
+export const ContactForm = ({ contacts, addContact }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        return;
+    }
   };
 
-  state = {
-    name: '',
-    number: '',
-  };
-
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleSubmit = evt => {
+  const handleSubmit = evt => {
     evt.preventDefault();
-    const { addContact, contacts } = this.props;
-    const { name } = this.state;
-
-    addContact({ ...this.state });
+    addContact({ name, number });
 
     if (
       contacts.find(
@@ -38,43 +33,50 @@ export class ContactForm extends Component {
       return;
     }
 
-    this.resetForm();
+    resetForm();
   };
 
-  resetForm = () => {
-    this.setState({ name: '', number: '' });
+  const resetForm = () => {
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    const { name, number } = this.state;
+  return (
+    <Form onSubmit={handleSubmit} autoComplete="off">
+      <FormLabel>
+        Name
+        <FormInput
+          name="name"
+          value={name}
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+          onChange={handleChange}
+        />
+      </FormLabel>
+      <FormLabel>
+        Number
+        <FormInput
+          type="tel"
+          name="number"
+          value={number}
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          onChange={handleChange}
+        />
+      </FormLabel>
+      <FormButton type="submit">Add contact</FormButton>
+    </Form>
+  );
+};
 
-    return (
-      <Form onSubmit={this.handleSubmit} autoComplete="off">
-        <FormLabel>
-          Name
-          <FormInput
-            name="name"
-            value={name}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            onChange={this.handleChange}
-          />
-        </FormLabel>
-        <FormLabel>
-          Number
-          <FormInput
-            type="tel"
-            name="number"
-            value={number}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            onChange={this.handleChange}
-          />
-        </FormLabel>
-        <FormButton type="submit">Add contact</FormButton>
-      </Form>
-    );
-  }
-}
+ContactForm.propTypes = {
+  addContact: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};
