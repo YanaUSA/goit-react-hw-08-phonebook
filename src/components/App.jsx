@@ -1,71 +1,75 @@
+import { nanoid } from 'nanoid';
+import { useState, useEffect } from 'react';
+
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-
-import { nanoid } from 'nanoid';
 import { Container, Title, ContactsTitle } from './App.styled';
-import { useState, useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    addedContact,
+    deletedContact,
+    filteredContact,
+} from '../redux/contacts/contactsSlice';
+import { contactsData, filteredData } from '../redux/selectors/selectors';
 
 export const App = () => {
-  const contactsBase = [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ];
+    const contacts_store = useSelector(contactsData);
+    const filterByName = useSelector(filteredData);
+    const dispatch = useDispatch();
 
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contacts')) ?? contactsBase;
-  });
-  const [filter, setFilter] = useState('');
+    // const [contacts, setContacts] = useState(() => {
+    //     return JSON.parse(window.localStorage.getItem('contacts')) ?? [];
+    // });
 
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+    // useEffect(() => {
+    //     window.localStorage.setItem('contacts', JSON.stringify(contacts));
+    // }, [contacts]);
 
-  const addContact = obj => {
-    const newContact = {
-      id: nanoid(),
-      ...obj,
+    const addContact = obj => {
+        const newContact = {
+            id: nanoid(),
+            ...obj,
+        };
+
+        contacts_store.find(
+            ({ name }) => name.toLowerCase() === obj.name.toLowerCase()
+        )
+            ? alert(`${obj.name} is already in contacts`)
+            : dispatch(addedContact(newContact));
     };
 
-    contacts.find(({ name }) => name.toLowerCase() === obj.name.toLowerCase())
-      ? alert(`${obj.name} is already in contacts`)
-      : setContacts(prevContacts => [...prevContacts, newContact]);
-  };
+    const deleteContact = id => {
+        dispatch(deletedContact(id));
+    };
 
-  const filterContact = e => {
-    setFilter(e.currentTarget.value);
-  };
+    const filteredName = filterValue => {
+        console.log('filterValue', filterValue);
+        dispatch(filteredContact(filterValue));
+    };
 
-  const deleteContact = id => {
-    setContacts(prevContacts =>
-      prevContacts.filter(contact => contact.id !== id)
+    const getFilteredContact = () => {
+        const nameFiltered = contacts_store.filter(({ name }) =>
+            name.toLowerCase().includes(filterByName)
+        );
+        return nameFiltered;
+    };
+
+    return (
+        <Container>
+            <Title>Phonebook</Title>
+
+            <ContactForm addContact={addContact} contacts={contacts_store} />
+
+            <ContactsTitle>Contacts</ContactsTitle>
+
+            <Filter addFilterValue={filteredName} />
+
+            <ContactList
+                contacts={getFilteredContact()}
+                deleteContact={deleteContact}
+            />
+        </Container>
     );
-  };
-
-  const getFilteredContact = () => {
-    const normalizedFilterValue = filter.toLowerCase().trim();
-
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(normalizedFilterValue)
-    );
-  };
-
-  return (
-    <Container>
-      <Title>Phonebook</Title>
-
-      <ContactForm addContact={addContact} contacts={contacts} />
-
-      <ContactsTitle>Contacts</ContactsTitle>
-
-      <Filter filterValue={filter} onChange={filterContact} />
-
-      <ContactList
-        contacts={getFilteredContact()}
-        deleteContact={deleteContact}
-      />
-    </Container>
-  );
 };
