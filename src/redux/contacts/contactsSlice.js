@@ -23,7 +23,6 @@ export const contactsSlice = createSlice({
             );
         },
         filteredContact: (state, { payload }) => {
-            console.log('payload', payload);
             state.filter = payload;
         },
     },

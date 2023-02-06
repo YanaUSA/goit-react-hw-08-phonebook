@@ -34,7 +34,6 @@ export const App = () => {
     };
 
     const filteredName = filterValue => {
-        console.log('filterValue', filterValue);
         dispatch(filteredContact(filterValue));
     };
 
