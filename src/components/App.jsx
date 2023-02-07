@@ -1,10 +1,6 @@
 // import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    // addedContact,
-    deletedContact,
-    filteredContact,
-} from '../redux/contacts/contactsSlice';
+import { deletedContact } from '../redux/contacts/contactsSlice';
 import { contactsData, filteredData } from '../redux/selectors/selectors';
 
 import { ContactForm } from './ContactForm/ContactForm';
@@ -17,25 +13,8 @@ export const App = () => {
     const filterByName = useSelector(filteredData);
     const dispatch = useDispatch();
 
-    // const addContact = obj => {
-    //     const newContact = {
-    //         id: nanoid(),
-    //         ...obj,
-    //     };
-
-    //     contactsStore.find(
-    //         ({ name }) => name.toLowerCase() === obj.name.toLowerCase()
-    //     )
-    //         ? alert(`${obj.name} is already in contacts`)
-    //         : dispatch(addedContact(newContact));
-    // };
-
-    const deleteContact = id => {
-        dispatch(deletedContact(id));
-    };
-
-    // const filteredName = filterValue => {
-    //     dispatch(filteredContact(filterValue));
+    // const deleteContact = id => {
+    //     dispatch(deletedContact(id));
     // };
 
     const getFilteredContact = () => {
@@ -48,16 +27,12 @@ export const App = () => {
     return (
         <Container>
             <Title>Phonebook</Title>
-            {/* <ContactForm addContact={addContact} contacts={contactsStore} /> */}
-
             <ContactForm />
             <ContactsTitle>Contacts</ContactsTitle>
-            {/* <Filter addFilterValue={filteredName} /> */}
-
             <Filter />
             <ContactList
                 contacts={getFilteredContact()}
-                deleteContact={deleteContact}
+                // deleteContact={deleteContact}
             />
         </Container>
     );
