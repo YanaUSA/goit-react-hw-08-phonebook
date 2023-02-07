@@ -1,50 +1,31 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
     ItemWrapper,
     UserContact,
     UserDeleteBtn,
 } from './ContactListItem.styled';
 
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    deletedContact,
-    // filteredContact,
-} from '../../redux/contacts/contactsSlice';
-import { contactsData } from '../../redux/selectors/selectors';
+import { useDispatch } from 'react-redux';
+import { deletedContact } from '../../redux/contacts/contactsSlice';
 
-export const ContactListItem = () => {
-    const contactsStore = useSelector(contactsData);
+export const ContactListItem = ({ userId, userName, tel }) => {
     const dispatch = useDispatch();
-
-    const { id, name, number } = contactsStore;
-
-    const deleteContact = id => {
-        dispatch(deletedContact(id));
-    };
-
-    // const getFilteredContact = () => {
-    //     const nameFiltered = contactsStore.filter(({ name }) =>
-    //         name.toLowerCase().includes(filterByName)
-    //     );
-    //     return nameFiltered;
-    // };
 
     return (
         <ItemWrapper>
             <UserContact>
-                {name + ': '}
-                {number}
+                {userName + ': '}
+                {tel}
             </UserContact>
-            <UserDeleteBtn onClick={() => deleteContact(id)}>
+            <UserDeleteBtn onClick={() => dispatch(deletedContact(userId))}>
                 Delete
             </UserDeleteBtn>
         </ItemWrapper>
     );
 };
 
-// ContactListItem.propTypes = {
-//     userName: PropTypes.string.isRequired,
-//     tel: PropTypes.string.isRequired,
-//     userId: PropTypes.string.isRequired,
-//     deleteContact: PropTypes.func.isRequired,
-// };
+ContactListItem.propTypes = {
+    userId: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+    tel: PropTypes.string.isRequired,
+};
