@@ -8,16 +8,13 @@ export const ContactList = () => {
     const contactsStore = useSelector(contactsData);
     const filterByName = useSelector(filteredData);
 
-    const getFilteredContact = () => {
-        const namesFiltered = contactsStore.filter(({ name }) =>
-            name.toLowerCase().includes(filterByName)
-        );
-        return namesFiltered;
-    };
+    const namesFiltered = contactsStore.filter(({ name }) =>
+        name.toLowerCase().includes(filterByName)
+    );
 
     return (
         <UserList>
-            {contactsStore.map(({ id, name, number }) => (
+            {namesFiltered.map(({ id, name, number }) => (
                 <ContactListItem
                     key={id}
                     userId={id}
