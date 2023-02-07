@@ -1,8 +1,31 @@
-import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 
-export const ContactForm = ({ contacts, addContact }) => {
+import { contactsData } from '../../redux/selectors/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { addedContact } from '../../redux/contacts/contactsSlice';
+
+export const ContactForm = () => {
+    /////////////// REDUX //////////////
+    const contactsStore = useSelector(contactsData);
+    const dispatch = useDispatch();
+
+    const addContact = obj => {
+        const newContact = {
+            id: nanoid(),
+            ...obj,
+        };
+
+        contactsStore.find(
+            ({ name }) => name.toLowerCase() === obj.name.toLowerCase()
+        )
+            ? alert(`${obj.name} is already in contacts`)
+            : dispatch(addedContact(newContact));
+    };
+
+    /////////////// LOCAL STATE //////////////
+
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
 
@@ -26,7 +49,7 @@ export const ContactForm = ({ contacts, addContact }) => {
         addContact({ name, number });
 
         if (
-            contacts.find(
+            contactsStore.find(
                 contact => contact.name.toLowerCase() === name.toLowerCase()
             )
         ) {
@@ -69,14 +92,4 @@ export const ContactForm = ({ contacts, addContact }) => {
             <FormButton type="submit">Add contact</FormButton>
         </Form>
     );
-};
-
-ContactForm.propTypes = {
-    addContact: PropTypes.func.isRequired,
-    contacts: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            number: PropTypes.string.isRequired,
-        })
-    ),
 };
