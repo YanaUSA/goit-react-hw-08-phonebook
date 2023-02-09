@@ -75,6 +75,7 @@ export const ContactForm = () => {
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     required
                     onChange={handleChange}
+                    placeholder="Enter contact name"
                 />
             </FormLabel>
             <FormLabel>
@@ -87,6 +88,7 @@ export const ContactForm = () => {
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
                     onChange={handleChange}
+                    placeholder="Number in format 000-00-00"
                 />
             </FormLabel>
             <FormButton type="submit">Add contact</FormButton>

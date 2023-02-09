@@ -27,6 +27,7 @@ export const Filter = () => {
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
                 onChange={handleFilterContact}
+                placeholder="Enter name for search"
             />
         </FilterLabel>
     );
