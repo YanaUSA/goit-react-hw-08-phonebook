@@ -1,12 +1,15 @@
 import { useSelector } from 'react-redux';
-import { contactsData, filteredData } from '../../redux/selectors/selectors';
+import {
+    selectedContacts,
+    selectedFilter,
+} from '../../redux/selectors/selectors';
 
 import { UserList } from './ContactList.styled';
 import { ContactListItem } from '../ContactListItem/ContactListItem';
 
 export const ContactList = () => {
-    const contactsStore = useSelector(contactsData);
-    const filterByName = useSelector(filteredData);
+    const contactsStore = useSelector(selectedContacts);
+    const filterByName = useSelector(selectedFilter);
 
     const namesFiltered = contactsStore.filter(({ name }) =>
         name.toLowerCase().includes(filterByName)
@@ -14,12 +17,12 @@ export const ContactList = () => {
 
     return (
         <UserList>
-            {namesFiltered.map(({ id, name, number }) => (
+            {namesFiltered.map(({ id, name, phone }) => (
                 <ContactListItem
                     key={id}
                     userId={id}
                     userName={name}
-                    tel={number}
+                    tel={phone}
                 />
             ))}
         </UserList>
