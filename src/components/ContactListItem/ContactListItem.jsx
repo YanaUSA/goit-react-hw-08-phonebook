@@ -6,7 +6,7 @@ import {
 } from './ContactListItem.styled';
 
 import { useDispatch } from 'react-redux';
-import { deletedContact } from '../../redux/contacts/contactsSlice';
+import { deleteContactThunk } from '../../redux/contacts/contactsThunk';
 
 export const ContactListItem = ({ userId, userName, tel }) => {
     const dispatch = useDispatch();
@@ -14,10 +14,10 @@ export const ContactListItem = ({ userId, userName, tel }) => {
     return (
         <ItemWrapper>
             <UserContact>
-                {userName + ': '}
+                {userName + ':  '}
                 {tel}
             </UserContact>
-            <UserDeleteBtn onClick={() => dispatch(deletedContact(userId))}>
+            <UserDeleteBtn onClick={() => dispatch(deleteContactThunk(userId))}>
                 Delete
             </UserDeleteBtn>
         </ItemWrapper>

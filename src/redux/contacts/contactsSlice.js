@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getContactsThunk } from './contactsThunk';
-
-// fetchContacts - одержання масиву контактів (метод GET) запитом. Базовий тип екшену "contacts/fetchAll".
-// addContact - додавання контакту (метод POST). Базовий тип екшену "contacts/addContact".
-// deleteContact - видалення контакту (метод DELETE). Базовий тип екшену "contacts/deleteContact".
+import {
+    getContactsThunk,
+    addContactThunk,
+    deleteContactThunk,
+} from './contactsThunk';
 
 export const contactsSlice = createSlice({
     name: 'contacts',
@@ -16,14 +16,6 @@ export const contactsSlice = createSlice({
         filter: '',
     },
     reducers: {
-        addedContact: (state, { payload }) => {
-            state.contacts.items.push(payload);
-        },
-        deletedContact: (state, { payload }) => {
-            state.contacts.items = state.contacts.items.filter(
-                contact => contact.id !== payload
-            );
-        },
         filteredContact: (state, { payload }) => {
             state.filter = payload;
         },
@@ -35,22 +27,43 @@ export const contactsSlice = createSlice({
                 state.contacts.isLoading = true;
             })
             .addCase(getContactsThunk.fulfilled, (state, action) => {
-                console.log('action in fulfilled', action);
-
                 state.contacts.isLoading = false;
                 state.contacts.error = null;
                 state.contacts.items = action.payload;
             })
             .addCase(getContactsThunk.rejected, (state, action) => {
-                console.log('action in rejected', action);
-
+                state.contacts.isLoading = false;
+                state.contacts.error = action.payload;
+            })
+            .addCase(addContactThunk.pending, (state, action) => {
+                state.contacts.isLoading = true;
+            })
+            .addCase(addContactThunk.fulfilled, (state, action) => {
+                state.contacts.isLoading = false;
+                state.contacts.error = null;
+                state.contacts.items.push(action.payload);
+            })
+            .addCase(addContactThunk.rejected, (state, action) => {
+                state.contacts.isLoading = false;
+                state.contacts.error = action.payload;
+            })
+            .addCase(deleteContactThunk.pending, (state, action) => {
+                state.contacts.isLoading = true;
+            })
+            .addCase(deleteContactThunk.fulfilled, (state, action) => {
+                state.contacts.isLoading = false;
+                state.contacts.error = null;
+                state.contacts.items = state.contacts.items.filter(
+                    contact => contact.id !== action.payload.id
+                );
+            })
+            .addCase(deleteContactThunk.rejected, (state, action) => {
                 state.contacts.isLoading = false;
                 state.contacts.error = action.payload;
             });
     },
 });
 
-export const { addedContact, deletedContact, filteredContact } =
-    contactsSlice.actions;
+export const { filteredContact } = contactsSlice.actions;
 
 export default contactsSlice.reducer;
