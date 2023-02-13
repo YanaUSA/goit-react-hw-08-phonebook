@@ -6,7 +6,7 @@ import {
 } from './ContactListItem.styled';
 
 import { useDispatch } from 'react-redux';
-import { deleteContactThunk } from '../../redux/contacts/contactsThunk';
+import { deleteContactThunk } from 'redux/contacts/contactsThunk';
 
 export const ContactListItem = ({ userId, userName, tel }) => {
     const dispatch = useDispatch();

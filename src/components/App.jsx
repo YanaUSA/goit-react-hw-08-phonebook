@@ -5,8 +5,8 @@ import Loader from './Loader/Loader';
 import { Container, Title, ContactsTitle } from './App.styled';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsThunk } from '../redux/contacts/contactsThunk';
-import { selectedIsLoading, selectedError } from '../redux/selectors/selectors';
+import { getContactsThunk } from 'redux/contacts/contactsThunk';
+import { selectedIsLoading, selectedError } from 'redux/selectors/selectors';
 
 export const App = () => {
     const dispatch = useDispatch();
