@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 
@@ -13,16 +13,11 @@ export const ContactForm = () => {
     const dispatch = useDispatch();
 
     const addContact = obj => {
-        const newContact = {
-            id: nanoid(),
-            ...obj,
-        };
-
         contactsStore.find(
             ({ name }) => name.toLowerCase() === obj.name.toLowerCase()
         )
             ? alert(`${obj.name} is already in contacts`)
-            : dispatch(addContactThunk(newContact));
+            : dispatch(addContactThunk(obj));
     };
 
     /////////////// LOCAL STATE //////////////
