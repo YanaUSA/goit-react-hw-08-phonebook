@@ -32,9 +32,6 @@ export const contactsSlice = createSlice({
 
     extraReducers: builder => {
         builder
-            // .addCase(getContactsThunk.pending, (state, action) => {
-            //     state.contacts.isLoading = true;
-            // })
             .addCase(getContactsThunk.pending, state => {
                 handlePending(state);
             })
