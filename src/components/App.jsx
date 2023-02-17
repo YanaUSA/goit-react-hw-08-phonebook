@@ -7,15 +7,11 @@ import {
     selectedError,
 } from 'redux/contacts/contacts-selectors';
 import AppLayout from './AppLayout/AppLayout';
-import { Title, ContactsTitle } from './App.styled';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
 import Loader from './Loader/Loader';
-import HomePage from '../pages/homePage/homePage';
-import ContactsPage from '../pages/contactsPage/contactsPage';
 
-// const HomePage = lazy(() => import('path/to/HomePage'));
+const HomePage = lazy(() => import('../pages/homePage/homePage'));
+const LoginPage = lazy(() => import('../pages/loginPage/loginPage'));
+const ContactsPage = lazy(() => import('../pages/contactsPage/contactsPage'));
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -29,11 +25,14 @@ export const App = () => {
     return (
         <>
             <AppLayout>
-                <Routes>
-                    <Route index path="/" element={<HomePage />} />
-                    <Route index path="/register" element={<HomePage />} />
-                    <Route path="/contacts" element={<ContactsPage />} />
-                </Routes>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/register" element={<HomePage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/contacts" element={<ContactsPage />} />
+                    </Routes>
+                </Suspense>
             </AppLayout>
         </>
     );

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Header, Main } from './AppLayout.styled';
 import Navigation from '../Navigation/Navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
@@ -11,7 +12,9 @@ const AppLayout = ({ children }) => {
                 <AuthNavigation />
                 <UserMenu />
             </Header>
-            <Main>{children}</Main>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Main>{children}</Main>
+            </Suspense>
         </>
     );
 };

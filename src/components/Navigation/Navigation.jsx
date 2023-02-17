@@ -2,11 +2,11 @@ import { Nav, NavigationLink } from './Navigation.styled';
 
 const Navigation = () => (
     <Nav>
-        <NavigationLink exact to="/">
+        <NavigationLink exact="true" to="/">
             Home
         </NavigationLink>
 
-        <NavigationLink exact to="/contacts">
+        <NavigationLink exact="true" to="/contacts">
             My contacts
         </NavigationLink>
     </Nav>
