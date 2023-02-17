@@ -13,6 +13,6 @@ export const NavigationLink = styled(NavLink)`
     color: #fff;
 
     active: {
-        color: #e84a5f;
+        color: tomato;
     }
 `;

@@ -12,6 +12,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import Loader from './Loader/Loader';
+import HomePage from '../pages/homePage/homePage';
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const App = () => {
         <>
             <AppLayout>
                 {/* <Routes> */}
+                <HomePage />
                 <Title>Phonebook</Title>
                 <ContactForm />
                 <ContactsTitle>Contacts</ContactsTitle>
