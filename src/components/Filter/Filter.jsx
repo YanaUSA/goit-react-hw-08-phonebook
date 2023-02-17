@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FilterLabel, FilterInput } from './Filter.styled';
 
 import { useDispatch } from 'react-redux';
-import { filteredContact } from 'redux/contacts/contactsSlice';
+import { filteredContact } from 'redux/contacts/contacts-slice';
 
 export const Filter = () => {
     const [filter, setFilter] = useState('');
