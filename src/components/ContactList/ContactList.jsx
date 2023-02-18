@@ -17,12 +17,12 @@ export const ContactList = () => {
 
     return (
         <UserList>
-            {namesFiltered.map(({ id, name, phone }) => (
+            {namesFiltered.map(({ id, name, number }) => (
                 <ContactListItem
                     key={id}
                     userId={id}
                     userName={name}
-                    tel={phone}
+                    tel={number}
                 />
             ))}
         </UserList>

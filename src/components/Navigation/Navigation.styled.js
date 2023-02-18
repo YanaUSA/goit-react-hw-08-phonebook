@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const AuthNavContainer = styled.div`
+export const Nav = styled.nav`
     display: flex;
 `;
 
-export const AuthNavigationLink = styled(NavLink)`
+export const NavigationLink = styled(NavLink)`
     position: relative;
     display: inline-block;
     text-decoration: none;

@@ -32,31 +32,21 @@ export const contactsSlice = createSlice({
 
     extraReducers: builder => {
         builder
-            .addCase(getContactsThunk.pending, state => {
-                handlePending(state);
-            })
+            .addCase(getContactsThunk.pending, handlePending)
             .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
                 state.contacts.isLoading = false;
                 state.contacts.error = null;
                 state.contacts.items = payload;
             })
-            .addCase(getContactsThunk.rejected, (state, { payload }) => {
-                handleRejected(state, { payload });
-            })
-            .addCase(addContactThunk.pending, state => {
-                handlePending(state);
-            })
+            .addCase(getContactsThunk.rejected, handleRejected)
+            .addCase(addContactThunk.pending, handlePending)
             .addCase(addContactThunk.fulfilled, (state, { payload }) => {
                 state.contacts.isLoading = false;
                 state.contacts.error = null;
                 state.contacts.items.push(payload);
             })
-            .addCase(addContactThunk.rejected, (state, { payload }) => {
-                handleRejected(state, { payload });
-            })
-            .addCase(deleteContactThunk.pending, state => {
-                handlePending(state);
-            })
+            .addCase(addContactThunk.rejected, handleRejected)
+            .addCase(deleteContactThunk.pending, handlePending)
             .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
                 state.contacts.isLoading = false;
                 state.contacts.error = null;
@@ -64,9 +54,7 @@ export const contactsSlice = createSlice({
                     contact => contact.id !== payload.id
                 );
             })
-            .addCase(deleteContactThunk.rejected, (state, { payload }) => {
-                handleRejected(state, { payload });
-            });
+            .addCase(deleteContactThunk.rejected, handleRejected);
     },
 });
 

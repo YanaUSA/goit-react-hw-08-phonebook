@@ -16,7 +16,28 @@ export const UserWelcomeText = styled.p`
 `;
 
 export const LogoutBtn = styled.p`
+    position: relative;
     font-weight: 700;
     cursor: pointer;
     padding: 12px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 3px;
+        transform: scaleX(0);
+        background-color: #ccdbe05d;
+
+        transition: transform 0.4s;
+    }
+
+    &:hover {
+        &:after {
+            transform: scaleX(1);
+        }
+    }
 `;

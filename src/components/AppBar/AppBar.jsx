@@ -1,10 +1,9 @@
-import { Suspense } from 'react';
-import { Header, Main } from './AppLayout.styled';
+import { Header } from './AppBar.styled';
 import Navigation from '../Navigation/Navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import UserMenu from '../UserMenu';
 
-const AppLayout = ({ children }) => {
+const AppBar = () => {
     return (
         <>
             <Header>
@@ -12,11 +11,8 @@ const AppLayout = ({ children }) => {
                 <AuthNavigation />
                 <UserMenu />
             </Header>
-            <Suspense fallback={<div>Loading...</div>}>
-                <Main>{children}</Main>
-            </Suspense>
         </>
     );
 };
 
-export default AppLayout;
+export default AppBar;

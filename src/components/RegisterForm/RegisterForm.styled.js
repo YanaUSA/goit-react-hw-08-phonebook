@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginFormTitle = styled.h1`
+export const RegisterFormTitle = styled.h1`
     font-size: 36px;
     font-weight: 700;
     margin: 20px 0;

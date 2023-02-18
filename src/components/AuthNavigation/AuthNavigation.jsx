@@ -3,12 +3,8 @@ import { AuthNavContainer, AuthNavigationLink } from './AuthNavigation.styled';
 const AuthNavigation = () => {
     return (
         <AuthNavContainer>
-            <AuthNavigationLink exact="true" to="/register">
-                Sign in
-            </AuthNavigationLink>
-            <AuthNavigationLink exact="true" to="/login">
-                Log in
-            </AuthNavigationLink>
+            <AuthNavigationLink to="/register">Sign up</AuthNavigationLink>
+            <AuthNavigationLink to="/login">Log in</AuthNavigationLink>
         </AuthNavContainer>
     );
 };

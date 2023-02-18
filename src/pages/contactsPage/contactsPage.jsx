@@ -5,7 +5,7 @@ import { Filter } from '../../components/Filter/Filter';
 
 const ContactsPage = () => {
     return (
-        <div>
+        <main>
             <Title>Phonebook</Title>
             <ContactForm />
             <ContactsTitle>Contacts</ContactsTitle>
@@ -13,7 +13,7 @@ const ContactsPage = () => {
             <ContactList />
             {/* {isLoading && !error && <Loader />}
             <ContactList /> */}
-        </div>
+        </main>
     );
 };
 
