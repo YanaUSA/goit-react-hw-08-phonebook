@@ -1,26 +1,11 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-const authFetchAPI = axios.create({
-    baseURL: 'https://connections-api.herokuapp.com',
-});
-
-const token = {
-    set: token => {
-        authFetchAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
-    },
-    clear: () => {
-        authFetchAPI.defaults.headers.common.Authorization = null;
-    },
-};
+import { PublicFetchAPI, PrivateFetchAPI, token } from 'http-api/http-api';
 
 export const registerThunk = createAsyncThunk(
     'auth/register',
     async (credentials, thunkAPI) => {
         try {
-            console.log('credentials', credentials);
-
-            const response = await authFetchAPI.post(
+            const response = await PublicFetchAPI.post(
                 '/users/signup',
                 credentials
             );
@@ -37,7 +22,7 @@ export const loginThunk = createAsyncThunk(
     'auth/login',
     async (credentials, thunkAPI) => {
         try {
-            const response = await authFetchAPI.post(
+            const response = await PublicFetchAPI.post(
                 '/users/login',
                 credentials
             );
@@ -54,11 +39,29 @@ export const logoutThunk = createAsyncThunk(
     'auth/logout',
     async (_, thunkAPI) => {
         try {
-            const response = await authFetchAPI.post('/users/logout');
+            const response = await PrivateFetchAPI.post('/users/logout');
             token.clear();
 
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const refreshThunk = createAsyncThunk(
+    'auth/refresh',
+    async (_, thunkAPI) => {
+        const stateToken = thunkAPI.getState().auth.token;
+
+        if (!stateToken) return;
+
+        token.set(stateToken);
+
+        try {
+            const response = await PrivateFetchAPI.get('/users/current');
+
             console.log('response', response);
-            console.log('token-response', response.data.token);
 
             return response.data;
         } catch (e) {

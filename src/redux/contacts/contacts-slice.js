@@ -39,6 +39,7 @@ export const contactsSlice = createSlice({
                 state.contacts.items = payload;
             })
             .addCase(getContactsThunk.rejected, handleRejected)
+            ////////////////////////////////////////
             .addCase(addContactThunk.pending, handlePending)
             .addCase(addContactThunk.fulfilled, (state, { payload }) => {
                 state.contacts.isLoading = false;
@@ -46,6 +47,7 @@ export const contactsSlice = createSlice({
                 state.contacts.items.push(payload);
             })
             .addCase(addContactThunk.rejected, handleRejected)
+            /////////////////////////////////////////////
             .addCase(deleteContactThunk.pending, handlePending)
             .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
                 state.contacts.isLoading = false;

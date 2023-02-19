@@ -29,8 +29,6 @@ const LoginForm = () => {
         e.preventDefault();
         dispatch(loginThunk({ email, password }));
 
-        console.log('LoginForm', { email, password });
-
         resetForm();
     };
 

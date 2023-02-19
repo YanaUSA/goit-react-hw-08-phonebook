@@ -1,14 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerThunk, loginThunk, logoutThunk } from './auth-thunk';
+import {
+    registerThunk,
+    loginThunk,
+    logoutThunk,
+    refreshThunk,
+} from './auth-thunk';
 
-const handlePending = state => {
-    state.isLoading = true;
-};
+// const handlePending = state => {
+//     state.isLoading = true;
+// };
 
-const handleRejected = (state, action) => {
-    state.isLoading = false;
-    state.error = action.payload;
-};
+// const handleRejected = (state, action) => {
+//     state.isLoading = false;
+//     state.error = action.payload;
+// };
 
 export const authSlice = createSlice({
     name: 'auth',
