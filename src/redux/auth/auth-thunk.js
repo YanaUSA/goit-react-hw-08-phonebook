@@ -5,22 +5,60 @@ const authFetchAPI = axios.create({
     baseURL: 'https://connections-api.herokuapp.com',
 });
 
-const setTokenToHeader = token => {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+const token = {
+    set: token => {
+        authFetchAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+    },
+    clear: () => {
+        authFetchAPI.defaults.headers.common.Authorization = null;
+    },
 };
 
-const clearTokenToHeader = () => {
-    axios.defaults.headers.common.Authorization = '';
-};
+export const registerThunk = createAsyncThunk(
+    'auth/register',
+    async (credentials, thunkAPI) => {
+        try {
+            console.log('credentials', credentials);
 
-console.log('axios', setTokenToHeader);
+            const response = await authFetchAPI.post(
+                '/users/signup',
+                credentials
+            );
+            token.set(response.data.token);
 
-export const userSignupThunk = createAsyncThunk(
-    'user/signup',
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const loginThunk = createAsyncThunk(
+    'auth/login',
+    async (credentials, thunkAPI) => {
+        try {
+            const response = await authFetchAPI.post(
+                '/users/login',
+                credentials
+            );
+            token.set(response.data.token);
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
+
+export const logoutThunk = createAsyncThunk(
+    'auth/logout',
     async (_, thunkAPI) => {
         try {
-            const response = await authFetchAPI.post('/users/signup');
-            console.log('response signup', response);
+            const response = await authFetchAPI.post('/users/logout');
+            token.clear();
+
+            console.log('response', response);
+            console.log('token-response', response.data.token);
 
             return response.data;
         } catch (e) {

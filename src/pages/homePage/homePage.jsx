@@ -11,7 +11,7 @@ const HomePage = () => {
             <div>
                 <HomePageTitle>Welcome to our Phonebook</HomePageTitle>
                 <HomePageCall>
-                    Please <HomePageCallSpan>Sign up</HomePageCallSpan> to start
+                    Please <HomePageCallSpan>Log in</HomePageCallSpan> to start
                 </HomePageCall>
             </div>
         </HomePageContainer>

@@ -6,8 +6,11 @@ import {
     FormInput,
     FormBtn,
 } from './LoginForm.styled';
+import { loginThunk } from '../../redux/auth/auth-thunk';
+import { useDispatch } from 'react-redux';
 
 const LoginForm = () => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -24,6 +27,10 @@ const LoginForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        dispatch(loginThunk({ email, password }));
+
+        console.log('LoginForm', { email, password });
+
         resetForm();
     };
 

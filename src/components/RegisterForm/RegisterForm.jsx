@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { registerThunk } from 'redux/auth/auth-thunk';
 
 import {
     RegisterFormTitle,
@@ -30,7 +31,8 @@ const RegisterForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch();
+        dispatch(registerThunk({ name, email, password }));
+
         resetForm();
     };
 

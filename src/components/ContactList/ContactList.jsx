@@ -11,6 +11,8 @@ export const ContactList = () => {
     const contactsStore = useSelector(selectedContacts);
     const filterByName = useSelector(selectedFilter);
 
+    console.log('contactsStore', contactsStore);
+
     const namesFiltered = contactsStore.filter(({ name }) =>
         name.toLowerCase().includes(filterByName)
     );

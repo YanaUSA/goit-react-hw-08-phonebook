@@ -1,10 +1,3 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import rootReducer from './contacts/contacts-slice';
-
-// export const store = configureStore({
-//     reducer: rootReducer,
-// });
-
 import { configureStore } from '@reduxjs/toolkit';
 import {
     persistStore,
