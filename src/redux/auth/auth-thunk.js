@@ -54,14 +54,14 @@ export const refreshThunk = createAsyncThunk(
     async (_, thunkAPI) => {
         const stateToken = thunkAPI.getState().auth.token;
 
-        if (!stateToken) return;
+        if (!stateToken) {
+            return thunkAPI.rejectWithValue('No valid token');
+        }
 
         token.set(stateToken);
 
         try {
             const response = await PrivateFetchAPI.get('/users/current');
-
-            console.log('response', response);
 
             return response.data;
         } catch (e) {

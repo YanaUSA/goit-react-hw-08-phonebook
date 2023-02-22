@@ -1,34 +1,44 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Container } from 'components/AppCommon.styled';
 
-export const HomePageContainer = styled.div`
-    min-height: calc(100vh - 50px);
+import { MdContactPhone } from 'react-icons/md';
+
+export const PageContainer = styled(Container)`
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100%;
 `;
 
-export const HomePageTextContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+export const PhonebookIcon = styled(MdContactPhone)`
+    color: ${props => props.theme.colors.neonBlue};
+    width: 100px;
+    height: 100px;
+    margin: ${props => props.theme.spacing(10)} 0;
 `;
 
 export const HomePageTitle = styled.h1`
-    font-weight: 700;
-    font-size: 48;
+    font-weight: ${props => props.theme.fontWeights.xl};
+    font-size: 32px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: ${props => props.theme.spacing(4)};
 `;
 
 export const HomePageCall = styled.p`
-    font-weight: 500;
-    font-size: 48;
+    display: flex;
+    justify-content: center;
     text-align: center;
+    font-weight: ${props => props.theme.fontWeights.m};
+    font-size: ${props => props.theme.fontSizes.l};
 `;
 
-export const HomePageCallSpan = styled.span`
-    font-weight: 500;
-    font-size: 48;
-    color: tomato;
+export const HomePageCallLink = styled(Link)`
+    display: flex;
+    justify-content: center;
+    margin: 0 ${props => props.theme.spacing(2)};
+    font-weight: ${props => props.theme.fontWeights.m};
+    font-size: ${props => props.theme.fontSizes.l};
+    color: ${props => props.theme.colors.accent};
 `;

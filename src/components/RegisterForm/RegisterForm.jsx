@@ -3,11 +3,12 @@ import { useDispatch } from 'react-redux';
 import { registerThunk } from 'redux/auth/auth-thunk';
 
 import {
-    RegisterFormTitle,
-    LoginForm,
+    RegForm,
     FormLabel,
     FormInput,
     FormBtn,
+    // BtnBox,
+    AlreadyRegisteredLink,
 } from './RegisterForm.styled';
 
 const RegisterForm = () => {
@@ -43,10 +44,8 @@ const RegisterForm = () => {
     };
 
     return (
-        <main>
-            <RegisterFormTitle>Sing-in page</RegisterFormTitle>
-
-            <LoginForm onSubmit={handleSubmit} autoComplete="off">
+        <div>
+            <RegForm onSubmit={handleSubmit} autoComplete="off">
                 <FormLabel>
                     Name
                     <FormInput
@@ -76,10 +75,14 @@ const RegisterForm = () => {
                         onChange={handleChange}
                     />
                 </FormLabel>
-
+                {/* <BtnBox> */}
                 <FormBtn type="submit">Sing up</FormBtn>
-            </LoginForm>
-        </main>
+                <AlreadyRegisteredLink to="/login">
+                    Already registered?
+                </AlreadyRegisteredLink>
+                {/* </BtnBox> */}
+            </RegForm>
+        </div>
     );
 };
 

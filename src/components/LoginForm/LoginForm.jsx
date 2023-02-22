@@ -38,9 +38,7 @@ const LoginForm = () => {
     };
 
     return (
-        <main>
-            <LoginFormTitle>Log-in page</LoginFormTitle>
-
+        <div>
             <LogInForm onSubmit={handleSubmit} autoComplete="off">
                 <FormLabel>
                     Email
@@ -64,7 +62,7 @@ const LoginForm = () => {
 
                 <FormBtn type="submit">Log in</FormBtn>
             </LogInForm>
-        </main>
+        </div>
     );
 };
 

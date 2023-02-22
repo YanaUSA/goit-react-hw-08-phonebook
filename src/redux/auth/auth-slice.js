@@ -5,15 +5,12 @@ import {
     logoutThunk,
     refreshThunk,
 } from './auth-thunk';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// const handlePending = state => {
-//     state.isLoading = true;
-// };
-
-// const handleRejected = (state, action) => {
-//     state.isLoading = false;
-//     state.error = action.payload;
-// };
+const handleRejected = (_, action) => {
+    toast.error(action.payload);
+};
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -25,13 +22,13 @@ export const authSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(registerThunk.pending, (state, action) => state)
+            .addCase(registerThunk.pending, state => state)
             .addCase(registerThunk.fulfilled, (state, { payload }) => {
                 state.user = payload.user;
                 state.token = payload.token;
                 state.isLoggedIn = true;
             })
-            .addCase(registerThunk.rejected, (state, action) => state)
+            .addCase(registerThunk.rejected, handleRejected)
             ///////////////////////////////////////////
             .addCase(loginThunk.pending, (state, action) => state)
             .addCase(loginThunk.fulfilled, (state, { payload }) => {
@@ -39,18 +36,27 @@ export const authSlice = createSlice({
                 state.token = payload.token;
                 state.isLoggedIn = true;
             })
-            .addCase(loginThunk.rejected, (state, action) => state)
+            .addCase(loginThunk.rejected, handleRejected)
             ///////////////////////////////////////////////
-            .addCase(logoutThunk.pending, (state, action) => state)
+            .addCase(logoutThunk.pending, state => state)
             .addCase(logoutThunk.fulfilled, state => {
                 state.user = { name: null, email: null };
                 state.token = null;
                 state.isLoggedIn = false;
             })
-            .addCase(logoutThunk.rejected, (state, action) => state);
-        //////////////////////////////////////////////
-
-        // .addCase( , (state, action)=>{})
+            .addCase(logoutThunk.rejected, handleRejected)
+            //////////////////////////////////////////////
+            .addCase(refreshThunk.pending, state => {
+                state.isRefreshing = true;
+            })
+            .addCase(refreshThunk.fulfilled, (state, { payload }) => {
+                state.user = payload;
+                state.isLoggedIn = true;
+                state.isRefreshing = false;
+            })
+            .addCase(refreshThunk.rejected, state => {
+                state.isRefreshing = false;
+            });
     },
 });
 

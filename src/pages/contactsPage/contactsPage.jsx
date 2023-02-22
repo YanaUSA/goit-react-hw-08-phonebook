@@ -5,10 +5,16 @@ import {
     selectedError,
 } from 'redux/contacts/contacts-selectors';
 import { getContactsThunk } from 'redux/contacts/contacts-thunk';
-import { Title, ContactsTitle } from '../../components/App.styled';
-import { ContactForm } from '../../components/ContactForm/ContactForm';
-import { ContactList } from '../../components/ContactList/ContactList';
-import { Filter } from '../../components/Filter/Filter';
+import {
+    ContactsPageContainer,
+    // ContactsPageTitle,
+    // ContactsSectionTitle,
+    ContactsFormContainer,
+    ContactsListContainer,
+} from './contactsPage.styled';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { ContactList } from 'components/ContactList/ContactList';
+import { Filter } from 'components/Filter/Filter';
 import Loader from 'components/Loader/Loader';
 
 const ContactsPage = () => {
@@ -21,14 +27,18 @@ const ContactsPage = () => {
     }, [dispatch]);
 
     return (
-        <main>
-            <Title>Phonebook</Title>
-            <ContactForm />
-            <ContactsTitle>Contacts</ContactsTitle>
-            <Filter />
-            {isLoading && !error && <Loader />}
-            <ContactList />
-        </main>
+        <ContactsPageContainer>
+            <ContactsFormContainer>
+                {/* <ContactsPageTitle>Phonebook</ContactsPageTitle> */}
+                <ContactForm />
+            </ContactsFormContainer>
+            <ContactsListContainer>
+                {/* <ContactsSectionTitle>My list</ContactsSectionTitle> */}
+                <Filter />
+                {isLoading && !error && <Loader />}
+                <ContactList />
+            </ContactsListContainer>
+        </ContactsPageContainer>
     );
 };
 

@@ -1,58 +1,61 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid antiquewhite;
-  padding: 15px 15px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 3px 0.2px #d3d3d3;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid ${props => props.theme.colors.grey};
+
+    padding: ${props => props.theme.spacing(2)};
+    margin-top: ${props => props.theme.spacing(5)};
+    border-radius: ${props => props.theme.spacing(3)};
+    box-shadow: 0px 0px 3px 1px rgba(211, 211, 211, 0.5);
 `;
 
 export const FormLabel = styled.label`
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  text-transform: capitalize;
+    font-size: ${props => props.theme.fontSizes.m};
+    font-weight: ${props => props.theme.fontWeights.m};
+    margin-bottom: ${props => props.theme.spacing(4)};
+    text-transform: capitalize;
 `;
 
 export const FormInput = styled.input`
-  display: block;
-  width: 300px;
-  margin-top: 8px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  box-shadow: 0 0 2px 0.2px #d3d3d3;
+    display: block;
+    width: 200px;
+    margin-top: ${props => props.theme.spacing(1)};
+    outline: none;
+    border: none;
+    border-radius: ${props => props.theme.spacing(1)};
+    padding: 5px 10px;
+    box-shadow: 0 0 2px 0.2px #d3d3d3;
+    font-weight: ${props => props.theme.fontWeights.norm};
+    font-size: ${props => props.theme.fontSizes.sm};
 `;
 
 export const FormButton = styled.button`
-  width: fix-content;
-  padding: 14px;
+    width: fix-content;
+    padding: ${props => props.theme.spacing(2)};
+    text-align: center;
+    color: ${props => props.theme.colors.black};
+    text-transform: uppercase;
+    font-weight: ${props => props.theme.fontWeights.l};
+    font-size: ${props => props.theme.fontSizes.sm};
+    cursor: pointer;
+    display: inline-block;
 
-  text-align: center;
-  color: #000;
-  text-transform: uppercase;
-  font-weight: 600;
+    background-color: transparent;
+    border: ${props => props.theme.spacing(0.7)} solid
+        ${props => props.theme.colors.neonBlue};
+    border-radius: 50px;
+    transition: ${props => props.theme.transition.btnHoverTime} ease-in-out;
+    color: ${props => props.theme.colors.neonBlue};
+    margin-bottom: ${props => props.theme.spacing(2)};
 
-  cursor: pointer;
-  display: inline-block;
-
-  background-color: transparent;
-  border: 3px solid #00d7c3;
-  border-radius: 50px;
-  -webkit-transition: 0.15s ease-in-out;
-  transition: 0.15s ease-in-out;
-  color: #00d7c3;
-  font-size: 14px;
-  font-weight: 600;
-
-  :hover {
-    box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #00d7c3;
-    border: 3px solid #00d7c3;
-  }
+    :hover {
+        box-shadow: 0 0 5px 0 ${props => props.theme.colors.neonBlue} inset,
+            0 0 10px 2px ${props => props.theme.colors.neonBlue};
+        border: ${props => props.theme.spacing(0.7)} solid
+            ${props => props.theme.colors.neonBlue};
+    }
 `;

@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import { createSlice } from '@reduxjs/toolkit';
 import {
     getContactsThunk,

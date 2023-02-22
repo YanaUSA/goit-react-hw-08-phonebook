@@ -2,20 +2,22 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const AuthNavContainer = styled.div`
-    display: flex;
+    outline: none;
 `;
 
 export const AuthNavigationLink = styled(NavLink)`
+    ${({ theme }) => `
     position: relative;
     display: inline-block;
     text-decoration: none;
-    font-weight: 700;
-    padding: 12px;
-    color: #fff;
+    font-weight: ${theme.fontWeights.xl};
+    padding: ${theme.spacing(2)};
+    color: ${theme.colors.white};
+    
 
     &.active {
-        color: tomato;
-    }
+        color: ${theme.colors.accent}};
+    `}
 
     &:after {
         content: '';
@@ -28,12 +30,16 @@ export const AuthNavigationLink = styled(NavLink)`
         transform: scaleX(0);
         background-color: #ccdbe05d;
 
-        transition: transform 0.4s;
+        transition: transform ${props => props.theme.transition.time};
     }
 
     &:hover {
         &:after {
             transform: scaleX(1);
         }
+    }
+
+    &:not(:last-child) {
+        margin-right: 10px;
     }
 `;

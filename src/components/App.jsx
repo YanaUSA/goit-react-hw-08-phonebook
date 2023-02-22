@@ -1,10 +1,16 @@
 import { useEffect, lazy, Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { Layout } from './Layout/Layout';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import GlobalStyle from '../theme/GlobalStyle';
+import Theme from '../theme/Theme';
+
 import { refreshThunk } from 'redux/auth/auth-thunk';
 import { useAuth } from 'hooks/useAuth';
-import Loader from 'components/Loader/Loader';
+import { Layout } from './Layout/Layout';
+import { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
 
 const HomePage = lazy(() => import('../pages/homePage/homePage'));
 const RegisterPage = lazy(() => import('../pages/registerPage/registerPage'));
@@ -21,28 +27,50 @@ export const App = () => {
     }, [dispatch]);
 
     return (
-        <>
-            <Suspense fallback={null}>
-                {isRefreshing ? (
-                    <Loader />
-                ) : (
+        !isRefreshing && (
+            <>
+                <Theme>
+                    <GlobalStyle />
                     <Routes>
                         <Route path="/" element={<Layout />}>
                             <Route index element={<HomePage />} />
                             <Route
                                 path="/register"
-                                element={<RegisterPage />}
+                                element={
+                                    <RestrictedRoute
+                                        component={RegisterPage}
+                                        redirectTo="/contacts"
+                                    />
+                                }
                             />
-                            <Route path="/login" element={<LoginPage />} />
+                            <Route
+                                path="/login"
+                                element={
+                                    <RestrictedRoute
+                                        component={LoginPage}
+                                        redirectTo="/contacts"
+                                    />
+                                }
+                            />
                             <Route
                                 path="/contacts"
-                                element={<ContactsPage />}
+                                element={
+                                    <PrivateRoute
+                                        component={ContactsPage}
+                                        redirectTo="/login"
+                                    />
+                                }
                             />
                             <Route path="*" element={<NotFoundPage />} />
                         </Route>
                     </Routes>
-                )}
-            </Suspense>
-        </>
+                </Theme>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    theme="light"
+                />
+            </>
+        )
     );
 };

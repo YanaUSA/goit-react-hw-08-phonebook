@@ -1,19 +1,17 @@
-// import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import { useContacts } from 'hooks/useContacts';
 import { Form, FormLabel, FormInput, FormButton } from './ContactForm.styled';
 
-import { selectedContacts } from 'redux/contacts/contacts-selectors';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 import { addContactThunk } from 'redux/contacts/contacts-thunk';
 
 export const ContactForm = () => {
     /////////////// REDUX //////////////
-    const contactsStore = useSelector(selectedContacts);
+    const { contacts } = useContacts();
     const dispatch = useDispatch();
 
     const addContact = obj => {
-        contactsStore.find(
+        contacts.find(
             ({ name }) => name.toLowerCase() === obj.name.toLowerCase()
         )
             ? alert(`${obj.name} is already in contacts`)
@@ -45,7 +43,7 @@ export const ContactForm = () => {
         addContact({ name, number });
 
         if (
-            contactsStore.find(
+            contacts.find(
                 contact => contact.name.toLowerCase() === name.toLowerCase()
             )
         ) {

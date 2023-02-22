@@ -1,10 +1,12 @@
 import RegisterForm from 'components/RegisterForm/RegisterForm';
+import { PageContainer, RegisterFormTitle } from './registerPage.styled';
 
 const RegisterPage = () => {
     return (
-        <div>
+        <PageContainer>
+            <RegisterFormTitle>Sing-up page</RegisterFormTitle>
             <RegisterForm />
-        </div>
+        </PageContainer>
     );
 };
 
