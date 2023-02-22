@@ -65,12 +65,13 @@ export const FormBtn = styled.button`
 export const AlreadyRegisteredLink = styled(Link)`
     width: fix-content;
     padding: ${props => props.theme.spacing(2)};
-    text-align: center;
+
     text-transform: uppercase;
     font-weight: ${props => props.theme.fontWeights.l};
     font-size: ${props => props.theme.fontSizes.sm};
     cursor: pointer;
     display: inline-block;
+    text-align: center;
 
     background: #333;
     border: ${props => props.theme.spacing(0.7)} solid transparent;

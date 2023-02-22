@@ -3,6 +3,8 @@ import {
     ItemWrapper,
     UserContact,
     UserDeleteBtn,
+    DeleteIcon,
+    NameWrapper,
 } from './ContactListItem.styled';
 
 import { useDispatch } from 'react-redux';
@@ -13,13 +15,20 @@ export const ContactListItem = ({ userId, userName, tel }) => {
 
     return (
         <ItemWrapper>
-            <UserContact>
-                {userName + ':  '}
-                {tel}
-            </UserContact>
-            <UserDeleteBtn onClick={() => dispatch(deleteContactThunk(userId))}>
+            <NameWrapper>
+                <UserContact>
+                    {userName + ':  '}
+                    {tel}
+                </UserContact>
+            </NameWrapper>
+
+            <div onClick={() => dispatch(deleteContactThunk(userId))}>
+                <DeleteIcon />
+            </div>
+
+            {/* <UserDeleteBtn onClick={() => dispatch(deleteContactThunk(userId))}>
                 Delete
-            </UserDeleteBtn>
+            </UserDeleteBtn> */}
         </ItemWrapper>
     );
 };

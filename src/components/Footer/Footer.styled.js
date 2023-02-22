@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { Container } from '../AppCommon.styled';
 
 export const FooterBox = styled.footer`
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: ${props => props.theme.colors.darkBgrColor};
+
     border-top: 1px solid #ececec;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
         0px -4px 5px 0px rgba(0, 0, 0, 0.14),

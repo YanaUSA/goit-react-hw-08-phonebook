@@ -10,11 +10,7 @@ const Footer = () => {
         <FooterBox>
             <FooterContainer>
                 <RightsReservedSpan>
-                    {' '}
-                    <RightsReservedSpan>
-                        <span>&#169;</span>
-                    </RightsReservedSpan>{' '}
-                    2023 All rights reserved. Developed by Yana Usatiuk |{' '}
+                    &#169; 2023 All rights reserved. Developed by Yana Usatiuk |{' '}
                 </RightsReservedSpan>
                 <SocialLink
                     to="https://www.linkedin.com/in/yana-usatiuk-223aa1262/"

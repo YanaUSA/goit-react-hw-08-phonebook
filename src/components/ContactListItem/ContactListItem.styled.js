@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import { ImBin } from 'react-icons/im';
 
 export const ItemWrapper = styled.li`
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+    max-width: inherit;
+`;
+
+export const NameWrapper = styled.div`
+    word-break: break-all;
+    white-space: pre-wrap;
 `;
 
 export const UserContact = styled.p`
@@ -35,5 +42,17 @@ export const UserDeleteBtn = styled.button`
             0 0 10px 2px ${props => props.theme.colors.neonCrimson};
         border: ${props => props.theme.spacing(0.7)} solid
             ${props => props.theme.colors.neonCrimson};
+    }
+`;
+
+export const DeleteIcon = styled(ImBin)`
+    width: ${props => props.theme.spacing(5)};
+    height: ${props => props.theme.spacing(5)};
+
+    fill: ${props => props.theme.colors.grey};
+    margin-left: ${props => props.theme.spacing(3)};
+
+    :hover {
+        fill: ${props => props.theme.colors.neonCrimson};
     }
 `;

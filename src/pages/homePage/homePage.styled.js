@@ -9,7 +9,8 @@ export const PageContainer = styled(Container)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    /* height: 100%; */
+    margin: auto 0;
 `;
 
 export const PhonebookIcon = styled(MdContactPhone)`
@@ -17,6 +18,8 @@ export const PhonebookIcon = styled(MdContactPhone)`
     width: 100px;
     height: 100px;
     margin: ${props => props.theme.spacing(10)} 0;
+
+    /* margin: auto 0; */
 `;
 
 export const HomePageTitle = styled.h1`
