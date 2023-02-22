@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {
     ItemWrapper,
     UserContact,
-    UserDeleteBtn,
+    // UserDeleteBtn,
     DeleteIcon,
     NameWrapper,
 } from './ContactListItem.styled';

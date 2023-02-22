@@ -1,11 +1,5 @@
 import { useState } from 'react';
-import {
-    LoginFormTitle,
-    LogInForm,
-    FormLabel,
-    FormInput,
-    FormBtn,
-} from './LoginForm.styled';
+import { LogInForm, FormLabel, FormInput, FormBtn } from './LoginForm.styled';
 import { loginThunk } from '../../redux/auth/auth-thunk';
 import { useDispatch } from 'react-redux';
 
