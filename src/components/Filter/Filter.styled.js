@@ -5,7 +5,7 @@ export const FilterBox = styled.div`
     margin-bottom: ${props => props.theme.spacing(7)};
 
     border: 1px solid ${props => props.theme.colors.grey};
-    padding: ${props => props.theme.spacing(3)};
+    padding: ${props => props.theme.spacing(4)};
     border-radius: ${props => props.theme.spacing(3)};
     box-shadow: 0px 0px 3px 1px rgba(211, 211, 211, 0.5);
     width: 300px;

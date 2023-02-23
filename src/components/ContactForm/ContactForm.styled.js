@@ -2,19 +2,20 @@ import styled from 'styled-components';
 
 export const Form = styled.form`
     /* width: fit-content; */
-    width: 100%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid ${props => props.theme.colors.grey};
 
-    padding: ${props => props.theme.spacing(2)};
+    padding: ${props => props.theme.spacing(4)};
     margin-top: ${props => props.theme.spacing(5)};
     border-radius: ${props => props.theme.spacing(3)};
     box-shadow: 0px 0px 3px 1px rgba(211, 211, 211, 0.5);
 `;
 
 export const FormLabel = styled.label`
+    width: 240px;
     font-size: ${props => props.theme.fontSizes.m};
     font-weight: ${props => props.theme.fontWeights.m};
     margin-bottom: ${props => props.theme.spacing(4)};

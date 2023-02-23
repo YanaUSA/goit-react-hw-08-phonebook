@@ -25,21 +25,22 @@ export const ContactsFormContainer = styled.div`
 `;
 
 export const ContactsListContainer = styled.div`
+    width: 300px;
     padding-top: ${props => props.theme.spacing(2)};
 `;
 
-export const ContactsPageTitle = styled.h1`
-    display: block;
-    font-size: 30px;
-    font-weight: 600;
-    margin: 20px;
-    color: inherit;
-`;
+// export const ContactsPageTitle = styled.h1`
+//     display: block;
+//     font-size: 30px;
+//     font-weight: 600;
+//     margin: 20px;
+//     color: inherit;
+// `;
 
-export const ContactsSectionTitle = styled.h2`
-    display: block;
-    margin: 20px;
-    font-size: 30px;
-    font-weight: 600;
-    color: inherit;
-`;
+// export const ContactsSectionTitle = styled.h2`
+//     display: block;
+//     margin: 20px;
+//     font-size: 30px;
+//     font-weight: 600;
+//     color: inherit;
+// `;

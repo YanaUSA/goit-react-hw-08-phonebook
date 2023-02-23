@@ -3,6 +3,8 @@ import {
     ItemWrapper,
     UserContact,
     // UserDeleteBtn,
+    IconWraper,
+    EditIcon,
     DeleteIcon,
     NameWrapper,
 } from './ContactListItem.styled';
@@ -21,10 +23,15 @@ export const ContactListItem = ({ userId, userName, tel }) => {
                     {tel}
                 </UserContact>
             </NameWrapper>
+            <IconWraper>
+                <div>
+                    <EditIcon />
+                </div>
 
-            <div onClick={() => dispatch(deleteContactThunk(userId))}>
-                <DeleteIcon />
-            </div>
+                <div onClick={() => dispatch(deleteContactThunk(userId))}>
+                    <DeleteIcon />
+                </div>
+            </IconWraper>
 
             {/* <UserDeleteBtn onClick={() => dispatch(deleteContactThunk(userId))}>
                 Delete
