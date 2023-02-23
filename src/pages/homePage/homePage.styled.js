@@ -10,14 +10,14 @@ export const PageContainer = styled(Container)`
     align-items: center;
     justify-content: center;
     /* height: 100%; */
-    margin: auto 0;
+    margin: auto;
 `;
 
 export const PhonebookIcon = styled(MdContactPhone)`
     color: ${props => props.theme.colors.neonBlue};
     width: 100px;
     height: 100px;
-    margin: ${props => props.theme.spacing(10)} 0;
+    margin: ${props => props.theme.spacing(16)} 0;
 
     /* margin: auto 0; */
 `;
@@ -26,7 +26,7 @@ export const HomePageTitle = styled.h1`
     font-weight: ${props => props.theme.fontWeights.xl};
     font-size: 32px;
     text-align: center;
-    margin-bottom: ${props => props.theme.spacing(4)};
+    margin-bottom: ${props => props.theme.spacing(7)};
 `;
 
 export const HomePageCall = styled.p`

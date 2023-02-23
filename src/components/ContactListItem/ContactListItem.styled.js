@@ -7,6 +7,7 @@ export const ItemWrapper = styled.li`
     justify-content: space-between;
     margin-bottom: 10px;
     max-width: inherit;
+   
 `;
 
 export const NameWrapper = styled.div`
@@ -50,7 +51,7 @@ export const DeleteIcon = styled(ImBin)`
     height: ${props => props.theme.spacing(5)};
 
     fill: ${props => props.theme.colors.grey};
-    margin-left: ${props => props.theme.spacing(3)};
+    margin-left: ${props => props.theme.spacing(7)};
 
     :hover {
         fill: ${props => props.theme.colors.neonCrimson};

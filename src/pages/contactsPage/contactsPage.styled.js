@@ -2,18 +2,30 @@ import styled from 'styled-components';
 import { Container } from 'components/AppCommon.styled';
 
 export const ContactsPageContainer = styled(Container)`
+    @media screen and (max-width: 767px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     display: flex;
+    justify-content: center;
+
     height: 100%;
 `;
 
 export const ContactsFormContainer = styled.div`
+    @media screen and (min-width: 768px) {
+        margin-right: ${props => props.theme.spacing(16)};
+    }
+    width: 300px;
     padding-top: ${props => props.theme.spacing(2)};
-    padding-right: ${props => props.theme.spacing(3)};
+    display: flex;
+    justify-content: center;
 `;
 
 export const ContactsListContainer = styled.div`
     padding-top: ${props => props.theme.spacing(2)};
-    padding-left: ${props => props.theme.spacing(3)};
 `;
 
 export const ContactsPageTitle = styled.h1`

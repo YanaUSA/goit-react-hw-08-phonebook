@@ -12,6 +12,7 @@ export const PageContainer = styled(Container)`
 export const LoginFormTitle = styled.h1`
     font-size: 28px;
     font-weight: ${props => props.theme.fontWeights.xl};
-    margin: 20px 0;
+    margin-top: ${props => props.theme.spacing(12)};
+    margin-bottom: ${props => props.theme.spacing(5)};
     text-transform: capitalize;
 `;

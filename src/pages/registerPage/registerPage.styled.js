@@ -14,4 +14,6 @@ export const RegisterFormTitle = styled.h1`
     font-weight: ${props => props.theme.fontWeights.xl};
     margin: 20px 0;
     text-transform: capitalize;
+    margin-top: ${props => props.theme.spacing(12)};
+    margin-bottom: ${props => props.theme.spacing(5)};
 `;

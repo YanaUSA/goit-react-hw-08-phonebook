@@ -8,6 +8,7 @@ export const FilterBox = styled.div`
     padding: ${props => props.theme.spacing(3)};
     border-radius: ${props => props.theme.spacing(3)};
     box-shadow: 0px 0px 3px 1px rgba(211, 211, 211, 0.5);
+    width: 300px;
 `;
 
 export const FilterLabel = styled.label`

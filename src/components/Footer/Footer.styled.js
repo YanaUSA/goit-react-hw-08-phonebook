@@ -40,10 +40,9 @@ export const SocialLink = styled(Link)`
     letter-spacing: 0.02em;
     color: ${theme.colors.grey};
     margin-left: 4px;
-    padding: ${theme.spacing(1)} 0;
-    
+    padding: ${theme.spacing(1)} 0;    
 
     &:hover {
-        color: tomato;
+        color: ${theme.colors.accent};
     `}
 `;

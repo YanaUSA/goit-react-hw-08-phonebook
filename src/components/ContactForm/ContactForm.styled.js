@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-    width: fit-content;
+    /* width: fit-content; */
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +23,7 @@ export const FormLabel = styled.label`
 
 export const FormInput = styled.input`
     display: block;
-    width: 200px;
+    width: 100%;
     margin-top: ${props => props.theme.spacing(1)};
     outline: none;
     border: none;
