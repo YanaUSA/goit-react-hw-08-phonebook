@@ -7,8 +7,8 @@ import {
 import { getContactsThunk } from 'redux/contacts/contacts-thunk';
 import {
     ContactsPageContainer,
-    // ContactsPageTitle,
-    // ContactsSectionTitle,
+    ContactsPageTitle,
+    ContactsSectionTitle,
     ContactsFormContainer,
     ContactsListContainer,
 } from './contactsPage.styled';
@@ -29,11 +29,11 @@ const ContactsPage = () => {
     return (
         <ContactsPageContainer>
             <ContactsFormContainer>
-                {/* <ContactsPageTitle>Phonebook</ContactsPageTitle> */}
+                <ContactsPageTitle>Phonebook</ContactsPageTitle>
                 <ContactForm />
             </ContactsFormContainer>
             <ContactsListContainer>
-                {/* <ContactsSectionTitle>My list</ContactsSectionTitle> */}
+                <ContactsSectionTitle>My list</ContactsSectionTitle>
                 <Filter />
                 {isLoading && !error && <Loader />}
                 <ContactList />

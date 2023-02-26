@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ImBin } from 'react-icons/im';
 import { BiEdit } from 'react-icons/bi';
 
-export const ItemWrapper = styled.li`
+export const ItemWrapperLi = styled.li`
     display: flex;
     justify-content: space-between;
     margin-bottom: 4px;
@@ -50,7 +50,7 @@ export const UserContact = styled.p`
 //     }
 // `;
 
-export const IconWraper = styled.div`
+export const IconWrapper = styled.div`
     display: flex;
 `;
 

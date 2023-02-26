@@ -1,42 +1,83 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import {
-    ItemWrapper,
+    ItemWrapperLi,
     UserContact,
     // UserDeleteBtn,
-    IconWraper,
+    IconWrapper,
     EditIcon,
     DeleteIcon,
     NameWrapper,
 } from './ContactListItem.styled';
-
-import { useDispatch } from 'react-redux';
-import { deleteContactThunk } from 'redux/contacts/contacts-thunk';
+import { Modal } from 'components/Modal/Modal';
+import { DeleteCheckPopup } from '../DeleteCheckPopup/DeleteCheckPopup';
+import { ButtonCommonStyles } from '../Button/Button.styled';
+import { useEffect } from 'react';
+import { EditForm } from '../EditForm/EditForm';
 
 export const ContactListItem = ({ userId, userName, tel }) => {
-    const dispatch = useDispatch();
+    const [contactId, setContactId] = useState('');
+    const [btnName, setBtnName] = useState('');
+
+    useEffect(() => {
+        if (contactId) {
+            document.body.style.overflow = 'hidden';
+        }
+    }, [contactId]);
+
+    const closeModal = () => {
+        setContactId('');
+        setBtnName('');
+        document.body.style.overflow = 'unset';
+    };
+
+    const clickBtnHandler = ({ currentTarget: { name } }) => {
+        setBtnName(name);
+        setContactId(userId);
+    };
 
     return (
-        <ItemWrapper>
-            <NameWrapper>
-                <UserContact>
-                    {userName + ':  '}
-                    {tel}
-                </UserContact>
-            </NameWrapper>
-            <IconWraper>
-                <div>
-                    <EditIcon />
-                </div>
+        <>
+            <ItemWrapperLi>
+                <NameWrapper>
+                    <UserContact>
+                        {userName + ':  '}
+                        {tel}
+                    </UserContact>
+                </NameWrapper>
+                <IconWrapper>
+                    <ButtonCommonStyles
+                        type="button"
+                        name="edit"
+                        onClick={clickBtnHandler}
+                    >
+                        <EditIcon />
+                    </ButtonCommonStyles>
 
-                <div onClick={() => dispatch(deleteContactThunk(userId))}>
-                    <DeleteIcon />
-                </div>
-            </IconWraper>
+                    <ButtonCommonStyles
+                        type="button"
+                        name="delete"
+                        onClick={clickBtnHandler}
+                    >
+                        <DeleteIcon />
+                    </ButtonCommonStyles>
+                </IconWrapper>
 
-            {/* <UserDeleteBtn onClick={() => dispatch(deleteContactThunk(userId))}>
+                {/* <UserDeleteBtn onClick={() => dispatch(deleteContactThunk(userId))}>
                 Delete
             </UserDeleteBtn> */}
-        </ItemWrapper>
+            </ItemWrapperLi>
+            {contactId && btnName === 'edit' && (
+                <Modal onClose={closeModal}>
+                    <EditForm id={contactId} onClose={closeModal} />
+                </Modal>
+            )}
+            {contactId && btnName === 'delete' && (
+                <Modal onClose={closeModal}>
+                    <DeleteCheckPopup id={contactId} onClose={closeModal} />
+                </Modal>
+            )}
+        </>
     );
 };
 

@@ -1,37 +1,39 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { deleteUsersThunk } from 'redux/users/users.thunk';
-import { Button } from 'components/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import { createPortal } from 'react-dom';
+import { ModalBackdrop, ModalWindow } from './Modal.styled';
+import { useEffect } from 'react';
 
-export const Modal = ({ id, closeModal }) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+const modalRoot = document.querySelector('#modal-root');
 
-    const deleteUser = id => {
-        dispatch(deleteUsersThunk(id));
-        closeModal();
-        navigate('/contacts');
+export const Modal = ({ onClose, children }) => {
+    useEffect(() => {
+        const handleEscape = e => {
+            if (e.code === 'Escape') {
+                onClose();
+            }
+        };
+        window.addEventListener('keydown', handleEscape);
+
+        return () => {
+            window.removeEventListener('keydown', handleEscape);
+        };
+    }, [onClose]);
+
+    const handleBackdrop = e => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
     };
 
-    return (
-        <ModalBackdrop>
-            <ModalWindow>
-                <p>Are you sure to Delete User?</p>
-                <ul>
-                    <li>
-                        <Button text="OK" clickHandler={() => deleteUser(id)} />
-                    </li>
-                    <li>
-                        <Button text="Cancel" clickHandler={closeModal} />
-                    </li>
-                </ul>
-            </ModalWindow>
-        </ModalBackdrop>
+    return createPortal(
+        <ModalBackdrop onClick={handleBackdrop}>
+            <ModalWindow>{children}</ModalWindow>
+        </ModalBackdrop>,
+        modalRoot
     );
 };
 
 Modal.propTypes = {
-    id: PropTypes.string.isRequired,
-    closeModal: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.node,
 };

@@ -1,71 +1,92 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useLocation, useNavigate } from 'react-router-dom';
-import { updateUser } from 'redux/users/users.thunk';
+import { updateContactThunk } from 'redux/contacts/contacts-thunk';
+import { useContacts } from 'hooks/useContacts';
 
-export const UpdateUser = () => {
-    const location = useLocation();
-    const [form, setForm] = useState(location?.state?.user);
+import {
+    Form,
+    FormLabel,
+    FormInput,
+    FormButton,
+} from '../ContactForm/ContactForm.styled';
+
+export const EditForm = ({ id, onClose }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const { contacts } = useContacts();
+
+    const { name, number } = contacts.find(el => el.id === id);
+
+    const [editName, setEditName] = useState(name);
+    const [editNumber, setEditNumber] = useState(number);
 
     const handleChange = ({ target: { name, value } }) => {
-        setForm(prev => ({ ...prev, [name]: value }));
+        switch (name) {
+            case 'name':
+                setEditName(value);
+                break;
+
+            case 'number':
+                setEditNumber(value);
+                break;
+
+            default:
+                return;
+        }
     };
-    const handleSubmit = e => {
-        e.preventDefault();
-        dispatch(updateUser(form));
-        navigate('/users/' + form.id);
+
+    const handleSubmit = evt => {
+        evt.preventDefault();
+
+        dispatch(
+            updateContactThunk({ id, name: editName, number: editNumber })
+        );
+
+        onClose();
     };
+
     return (
-        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '8px' }}>
-            <label>
-                address
-                <input
-                    onChange={handleChange}
-                    value={form.address}
-                    name="address"
-                    type="text"
-                />
-            </label>
-            <label>
-                avatar
-                <input
-                    onChange={handleChange}
-                    value={form.avatar}
-                    name="avatar"
-                    type="text"
-                />
-            </label>
-            <label>
-                email
-                <input
-                    onChange={handleChange}
-                    value={form.email}
-                    name="email"
-                    type="email"
-                />
-            </label>
-            <label>
-                name
-                <input
-                    onChange={handleChange}
-                    value={form.name}
-                    name="name"
-                    type="text"
-                />
-            </label>
-            <label>
-                phone
-                <input
-                    onChange={handleChange}
-                    value={form.phone}
-                    name="phone"
-                    type="tel"
-                />
-            </label>
-            <button type="submit">Update User</button>
-        </form>
+        <>
+            {' '}
+            <Form onSubmit={handleSubmit} autoComplete="off">
+                <FormLabel>
+                    Name
+                    <FormInput
+                        name="name"
+                        value={editName}
+                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                        required
+                        onChange={handleChange}
+                        placeholder="Enter name"
+                    />
+                </FormLabel>
+                <FormLabel>
+                    Number
+                    <FormInput
+                        type="tel"
+                        name="number"
+                        value={editNumber}
+                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                        required
+                        onChange={handleChange}
+                        placeholder="000-00-00"
+                    />
+                </FormLabel>
+                <FormButton type="submit" text="Edit">
+                    Edit
+                </FormButton>
+                <FormButton type="button" text="Cancel" onClick={onClose}>
+                    Cancel
+                </FormButton>
+            </Form>
+        </>
     );
+};
+
+EditForm.propTypes = {
+    id: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
 };

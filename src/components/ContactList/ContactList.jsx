@@ -10,15 +10,17 @@ export const ContactList = () => {
     );
 
     return (
-        <UserList>
-            {namesFiltered.map(({ id, name, number }) => (
-                <ContactListItem
-                    key={id}
-                    userId={id}
-                    userName={name}
-                    tel={number}
-                />
-            ))}
-        </UserList>
+        <>
+            <UserList>
+                {namesFiltered.map(({ id, name, number }) => (
+                    <ContactListItem
+                        key={id}
+                        userId={id}
+                        userName={name}
+                        tel={number}
+                    />
+                ))}
+            </UserList>
+        </>
     );
 };

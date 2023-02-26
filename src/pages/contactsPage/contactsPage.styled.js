@@ -29,18 +29,42 @@ export const ContactsListContainer = styled.div`
     padding-top: ${props => props.theme.spacing(2)};
 `;
 
-// export const ContactsPageTitle = styled.h1`
-//     display: block;
-//     font-size: 30px;
-//     font-weight: 600;
-//     margin: 20px;
-//     color: inherit;
-// `;
+export const ContactsPageTitle = styled.h1`
+    /////////styles for visible title ///////////
+    /* display: block;
+    font-size: 30px;
+    font-weight: 600; */
+    /* margin: 20px;
+    color: inherit; */
 
-// export const ContactsSectionTitle = styled.h2`
-//     display: block;
-//     margin: 20px;
-//     font-size: 30px;
-//     font-weight: 600;
-//     color: inherit;
-// `;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+`;
+
+export const ContactsSectionTitle = styled.h2`
+    /////////styles for visible title ///////////
+    /* display: block;
+    margin: 20px;
+    font-size: 30px;
+    font-weight: 600;
+    color: inherit; */
+
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+`;

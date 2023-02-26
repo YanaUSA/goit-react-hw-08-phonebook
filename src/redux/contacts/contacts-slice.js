@@ -4,6 +4,7 @@ import {
     getContactsThunk,
     addContactThunk,
     deleteContactThunk,
+    updateContactThunk,
 } from './contacts-thunk';
 
 const handlePending = state => {
@@ -57,7 +58,22 @@ export const contactsSlice = createSlice({
                     contact => contact.id !== payload.id
                 );
             })
-            .addCase(deleteContactThunk.rejected, handleRejected);
+            .addCase(deleteContactThunk.rejected, handleRejected)
+            //////////////////////////////////
+            .addCase(updateContactThunk.pending, handlePending)
+            .addCase(updateContactThunk.fulfilled, (state, { payload }) => {
+                state.contacts.isLoading = false;
+                state.contacts.error = null;
+
+                state.contacts.items = state.contacts.items.map(item => {
+                    if (item.id === payload.id) {
+                        return payload;
+                    } else {
+                        return item;
+                    }
+                });
+            })
+            .addCase(updateContactThunk.rejected, handleRejected);
     },
 });
 
