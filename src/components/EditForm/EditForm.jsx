@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import { updateContactThunk } from 'redux/contacts/contacts-thunk';
 import { useContacts } from 'hooks/useContacts';
-
 import {
-    Form,
-    FormLabel,
-    FormInput,
-    FormButton,
-} from '../ContactForm/ContactForm.styled';
+    EditFormStyle,
+    EditFormLabel,
+    EditFormInput,
+    EditFormBtnList,
+    EditFormButton,
+} from './EditForm.styled';
 
 export const EditForm = ({ id, onClose }) => {
     const dispatch = useDispatch();
@@ -49,10 +49,10 @@ export const EditForm = ({ id, onClose }) => {
     return (
         <>
             {' '}
-            <Form onSubmit={handleSubmit} autoComplete="off">
-                <FormLabel>
+            <EditFormStyle onSubmit={handleSubmit} autoComplete="off">
+                <EditFormLabel>
                     Name
-                    <FormInput
+                    <EditFormInput
                         name="name"
                         value={editName}
                         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -61,10 +61,10 @@ export const EditForm = ({ id, onClose }) => {
                         onChange={handleChange}
                         placeholder="Enter name"
                     />
-                </FormLabel>
-                <FormLabel>
+                </EditFormLabel>
+                <EditFormLabel>
                     Number
-                    <FormInput
+                    <EditFormInput
                         type="tel"
                         name="number"
                         value={editNumber}
@@ -74,14 +74,24 @@ export const EditForm = ({ id, onClose }) => {
                         onChange={handleChange}
                         placeholder="000-00-00"
                     />
-                </FormLabel>
-                <FormButton type="submit" text="Edit">
-                    Edit
-                </FormButton>
-                <FormButton type="button" text="Cancel" onClick={onClose}>
-                    Cancel
-                </FormButton>
-            </Form>
+                </EditFormLabel>
+                <EditFormBtnList>
+                    <li>
+                        <EditFormButton type="submit" text="Edit">
+                            Edit
+                        </EditFormButton>
+                    </li>
+                    <li>
+                        <EditFormButton
+                            type="button"
+                            text="Cancel"
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </EditFormButton>
+                    </li>
+                </EditFormBtnList>
+            </EditFormStyle>
         </>
     );
 };

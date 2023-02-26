@@ -1,6 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { Button } from 'components/Button/Button';
 import { deleteContactThunk } from 'redux/contacts/contacts-thunk';
+import {
+    DeleteCheckText,
+    DeleteCheckBtnList,
+    DeleteCheckButton,
+} from './DeleteCheckPopup.styled';
 
 export const DeleteCheckPopup = ({ id, onClose }) => {
     const dispatch = useDispatch();
@@ -12,25 +16,29 @@ export const DeleteCheckPopup = ({ id, onClose }) => {
 
     return (
         <>
-            <p style={{ color: 'black' }}>
+            <DeleteCheckText>
                 Are you sure you want to delete the contact?
-            </p>
-            <ul>
+            </DeleteCheckText>
+            <DeleteCheckBtnList>
                 <li>
-                    <Button
+                    <DeleteCheckButton
                         type="button"
                         text="OK"
-                        clickHandler={() => deleteContact(id)}
-                    />
+                        onClick={() => deleteContact(id)}
+                    >
+                        OK
+                    </DeleteCheckButton>
                 </li>
                 <li>
-                    <Button
+                    <DeleteCheckButton
                         type="button"
                         text="Cancel"
-                        clickHandler={onClose}
-                    />
+                        onClick={onClose}
+                    >
+                        Cancel
+                    </DeleteCheckButton>
                 </li>
-            </ul>
+            </DeleteCheckBtnList>
         </>
     );
 };

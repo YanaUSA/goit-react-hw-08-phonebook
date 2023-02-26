@@ -17,7 +17,7 @@ export const ModalWindow = styled.div`
     background-color: ${props => props.theme.colors.white};
     margin: auto;
     padding: 20px;
-    width: 50%;
+    width: 60%;
     border-radius: ${props => props.theme.spacing(3)};
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
     z-index: 150;
